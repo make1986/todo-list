@@ -1,0 +1,59 @@
+{
+  "name": "TodoList",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "dev": "webpack -w & nodemon server.js"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^1.0.1",
+    "file-loader": "^3.0.1",
+    "node-sass": "^4.10.0",
+    "nodemon": "^1.12.5",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^3.10.0",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "dependencies": {
+    "async": "^2.6.1",
+    "axios": "^0.18.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "connect-mongo": "^2.0.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "helmet": "^3.15.0",
+    "isomorphic-fetch": "^2.2.1",
+    "mongo-xlsx": "^1.0.12",
+    "mongoose": "^5.4.6",
+    "multer": "^1.4.1",
+    "nodemailer": "^5.1.1",
+    "react": "^16.7.0",
+    "react-beforeunload": "^1.0.4",
+    "react-dom": "^16.7.0",
+    "react-router-dom": "^4.3.1",
+    "serialize-javascript": "^1.6.1",
+    "sfcookies": "^1.0.2"
+  }
+}
