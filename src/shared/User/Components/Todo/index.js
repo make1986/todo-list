@@ -21,7 +21,8 @@ const Todo = ({
   dropEnter,
   dropLeave,
   completeTask,
-  logout
+  logout,
+  blureTask
 }) => (
   <div className="todo">
     {data.length === 0 ? (
@@ -40,6 +41,8 @@ const Todo = ({
               name={`task-${task.id}`}
             >
               <Textfield
+                blureTask={blureTask}
+                isTask={true}
                 type="textarea"
                 name={task.id}
                 placeholder="What to do?"

@@ -1843,6 +1843,8 @@ var withTextFields = function withTextFields(Component) {
         if (this.props.isChecklist) {
           var isIsset = !this.props.value || this.props.value.length === 0 ? false : true;
           this.props.blureChek(isIsset, this.props.name);
+        } else if (this.props.isTask) {
+          this.props.blureTask();
         }
       }
     }, {
@@ -2012,7 +2014,8 @@ var Todo = function Todo(_ref) {
       dropEnter = _ref.dropEnter,
       dropLeave = _ref.dropLeave,
       completeTask = _ref.completeTask,
-      logout = _ref.logout;
+      logout = _ref.logout,
+      blureTask = _ref.blureTask;
   return _react2.default.createElement(
     "div",
     { className: "todo" },
@@ -2044,6 +2047,8 @@ var Todo = function Todo(_ref) {
               name: "task-" + task.id
             },
             _react2.default.createElement(_Textfield2.default, {
+              blureTask: blureTask,
+              isTask: true,
               type: "textarea",
               name: task.id,
               placeholder: "What to do?",
@@ -2193,7 +2198,8 @@ var withTodoList = function withTodoList(Component, api_prefix, validate) {
         user: _this.props.user,
         drag: "",
         drop: "",
-        dragtype: ""
+        dragtype: "",
+        data: _this.props.data
       };
       _this.addTask = _this.addTask.bind(_this);
       _this.handlerChange = _this.handlerChange.bind(_this);
@@ -2208,10 +2214,18 @@ var withTodoList = function withTodoList(Component, api_prefix, validate) {
       _this.dropEnter = _this.dropEnter.bind(_this);
       _this.dropLeave = _this.dropLeave.bind(_this);
       _this.completeTask = _this.completeTask.bind(_this);
+      _this.blureTask = _this.blureTask.bind(_this);
       return _this;
     }
 
     _createClass(WithTodoList, [{
+      key: "componentWillReceiveProps",
+      value: function componentWillReceiveProps(nextProps) {
+        if (this.props.data !== nextProps.data) {
+          this.setState({ data: nextProps.data });
+        }
+      }
+    }, {
       key: "addTask",
       value: function addTask() {
         var data = this.props.data;
@@ -2234,18 +2248,18 @@ var withTodoList = function withTodoList(Component, api_prefix, validate) {
     }, {
       key: "handlerChange",
       value: function handlerChange(id, value) {
-        var data = this.props.data;
+        var data = this.state.data;
 
         var idx = data.findIndex(function (x) {
           return x.id.toString() === id.toString();
         });
         data[idx].task = value;
-        this.props.callServer(data);
+        this.setState({ data: data });
       }
     }, {
       key: "checklistChange",
       value: function checklistChange(name, value) {
-        var data = this.props.data;
+        var data = this.state.data;
 
         var block_id = name.split("-")[0];
         var check_id = name.split("-")[1];
@@ -2256,12 +2270,19 @@ var withTodoList = function withTodoList(Component, api_prefix, validate) {
           return x.id.toString() === check_id.toString();
         });
         data[block_idx].checklist[check_idx].value = value;
+        this.setState({ data: data });
+      }
+    }, {
+      key: "blureTask",
+      value: function blureTask(id) {
+        var data = this.state.data;
+
         this.props.callServer(data);
       }
     }, {
       key: "blureChek",
       value: function blureChek(flag, name) {
-        var data = this.props.data;
+        var data = this.state.data;
 
         var block_id = name.split("-")[0];
         var check_id = name.split("-")[1];
@@ -2476,7 +2497,9 @@ var withTodoList = function withTodoList(Component, api_prefix, validate) {
           drop: this.drop,
           dropEnter: this.dropEnter,
           dropLeave: this.dropLeave,
-          completeTask: this.completeTask
+          completeTask: this.completeTask,
+          data: this.state.data,
+          blureTask: this.blureTask
         }));
       }
     }]);

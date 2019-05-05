@@ -10,7 +10,8 @@ const withTodoList = (Component, api_prefix, validate) => {
         user: this.props.user,
         drag: "",
         drop: "",
-        dragtype: ""
+        dragtype: "",
+        data: this.props.data
       };
       this.addTask = this.addTask.bind(this);
       this.handlerChange = this.handlerChange.bind(this);
@@ -25,6 +26,13 @@ const withTodoList = (Component, api_prefix, validate) => {
       this.dropEnter = this.dropEnter.bind(this);
       this.dropLeave = this.dropLeave.bind(this);
       this.completeTask = this.completeTask.bind(this);
+      this.blureTask = this.blureTask.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+      if (this.props.data !== nextProps.data) {
+        this.setState({ data: nextProps.data });
+      }
     }
 
     addTask() {
@@ -44,14 +52,14 @@ const withTodoList = (Component, api_prefix, validate) => {
     }
 
     handlerChange(id, value) {
-      let { data } = this.props;
+      let { data } = this.state;
       const idx = data.findIndex(x => x.id.toString() === id.toString());
       data[idx].task = value;
-      this.props.callServer(data);
+      this.setState({ data });
     }
 
     checklistChange(name, value) {
-      let { data } = this.props;
+      let { data } = this.state;
       const block_id = name.split("-")[0];
       const check_id = name.split("-")[1];
       const block_idx = data.findIndex(
@@ -61,10 +69,14 @@ const withTodoList = (Component, api_prefix, validate) => {
         x => x.id.toString() === check_id.toString()
       );
       data[block_idx].checklist[check_idx].value = value;
+      this.setState({ data });
+    }
+    blureTask(id) {
+      let { data } = this.state;
       this.props.callServer(data);
     }
     blureChek(flag, name) {
-      let { data } = this.props;
+      let { data } = this.state;
       const block_id = name.split("-")[0];
       const check_id = name.split("-")[1];
       const block_idx = data.findIndex(
@@ -268,6 +280,8 @@ const withTodoList = (Component, api_prefix, validate) => {
           dropEnter={this.dropEnter}
           dropLeave={this.dropLeave}
           completeTask={this.completeTask}
+          data={this.state.data}
+          blureTask={this.blureTask}
         />
       );
     }

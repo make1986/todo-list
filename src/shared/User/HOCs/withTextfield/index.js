@@ -24,6 +24,8 @@ const withTextFields = Component => {
         const isIsset =
           !this.props.value || this.props.value.length === 0 ? false : true;
         this.props.blureChek(isIsset, this.props.name);
+      } else if (this.props.isTask) {
+        this.props.blureTask();
       }
     }
 
