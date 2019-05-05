@@ -1,0 +1,61 @@
+.text-field {
+  position: relative;
+  width: 100%;
+  margin: 8px 0;
+  overflow: hidden;
+
+  .error {
+    border: 1px solid $red;
+  }
+
+  input,
+  textarea {
+    background-color: #fff;
+    border: 1px solid #dfe1e5;
+    width: calc(100% - 32px);
+    resize: none;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: $font_montserrat;
+    font-weight: 600;
+    color: #222;
+    transition: all 0.2s linear;
+
+    &:hover,
+    &:focus {
+      border-color: rgba(223, 225, 229, 0);
+      box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+    }
+  }
+  input {
+    height: 52px;
+    padding-top: 4px;
+  }
+  textarea {
+    min-height: 30px;
+    padding: 16px 16px;
+    overflow: hidden;
+  }
+
+  &__count {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    color: #ff5252;
+    font-size: 12px;
+  }
+  &__label {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    font-size: 16px;
+    color: $grey;
+    transition: all 0.2s linear;
+
+    &.active {
+      transform: translateY(-10px);
+      font-size: 12px;
+    }
+  }
+}

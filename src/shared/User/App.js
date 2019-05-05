@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import routes from "./routes";
 
 import P404 from "./Pages/404";
+import Error from "./Components/Error";
 
 class App extends React.Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class App extends React.Component {
           ))}
           <Route render={props => <P404 {...props} />} />
         </Switch>
+        {error ? <Error err={error} close={this.addError} /> : ""}
       </div>
     );
   }

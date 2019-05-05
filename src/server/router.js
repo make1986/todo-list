@@ -16,6 +16,7 @@ router.get("*", (req, res, next) => {
   const handlerObject = activeRoute.handlerClass
     ? new activeRoute.handlerClass(
         activeRoute.params.url,
+        activeRoute.params.type,
         activeRoute.params.params(req.path)
       )
     : null;

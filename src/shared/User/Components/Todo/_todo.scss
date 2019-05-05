@@ -1,0 +1,179 @@
+.todo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .trash {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $green;
+    h3 {
+      color: #fff;
+      margin: 0;
+      margin-bottom: 15px;
+    }
+    span {
+      color: $light_grey;
+    }
+  }
+
+  &__container {
+    display: flex;
+    height: 100%;
+    width: calc(100% - 30px);
+    margin-top: 60px;
+    margin-left: 30px;
+
+    .drop-container-task {
+      min-height: 100%;
+      width: 30px;
+      min-width: 30px;
+    }
+
+    .task {
+      position: relative;
+      width: 300px;
+      min-width: 300px;
+      min-height: 200px;
+      background-color: $green;
+      border-radius: 2px;
+      box-shadow: 0 1px 6px rgba(57, 73, 76, 0.35);
+      padding: 15px;
+      cursor: grab;
+      overflow: hidden;
+
+      &__complete {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        h3 {
+          background-color: #fff;
+          width: 60px;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          color: $green;
+          font-size: 40px;
+          margin: 0;
+          margin-bottom: 20px;
+        }
+        span {
+          color: #fff;
+          cursor: pointer;
+
+          &:hover {
+            color: $grey;
+          }
+        }
+      }
+
+      .button {
+        margin-top: 15px;
+        margin-bottom: 5px;
+      }
+
+      &__checklist {
+        .el {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: grab;
+        }
+        .drop-container-el {
+          width: 100%;
+          height: 10px;
+        }
+        .check-text {
+          color: #fff;
+          font-weight: 600;
+
+          &.checked {
+            text-decoration: line-through;
+          }
+
+          cursor: pointer;
+        }
+      }
+
+      &__checklist-add {
+        display: block;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 14px;
+        margin-left: auto;
+        margin-right: auto;
+
+        &:hover {
+          color: $light_grey;
+        }
+      }
+    }
+    .next-task {
+      cursor: pointer;
+      background-color: #fff;
+      font-size: 40px;
+      font-weight: 500;
+      color: $green;
+      box-shadow: 0 1px 6px rgba(57, 73, 76, 0.35);
+      min-width: 60px;
+      min-height: 60px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 30px;
+      border-radius: 50%;
+      margin-top: 50px;
+
+      &:hover {
+        color: $dark_green;
+        box-shadow: 0 2px 10px 1px rgba(57, 73, 76, 0.4),
+          0 1px 2px rgba(57, 73, 76, 0.25);
+      }
+    }
+  }
+
+  &__empty_message {
+    color: $green;
+    font-size: 24px;
+    font-weight: 500;
+
+    span {
+      cursor: pointer;
+      &:hover {
+        color: $dark_green;
+      }
+    }
+  }
+  .logout {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 120px;
+  }
+}

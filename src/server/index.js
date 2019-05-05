@@ -9,13 +9,15 @@ import compression from "compression";
 import bodyParser from "body-parser";
 import helmet from "helmet";
 import session from "express-session";
+import cookieParser from "cookie-parser";
 
 import config from "../etc/config";
 import db from "./db/connect";
 import sessionStore from "./sessionStore";
-
+import { user, todo } from "./api";
 import routes from "./router";
 
+app.use(cookieParser());
 db.setUpConnect();
 app.use(helmet());
 app.use(
@@ -34,6 +36,9 @@ app.use(
     store: sessionStore
   })
 );
+
+app.use("/api/user", user);
+app.use("/api/todo", todo);
 
 app.use(express.static("public"));
 app.use(routes);
