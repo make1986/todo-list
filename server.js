@@ -2571,10 +2571,10 @@ var Error = function Error(_ref) {
       close = _ref.close;
   return _react2.default.createElement(
     "div",
-    { className: "error" },
+    { className: "error-block" },
     _react2.default.createElement(
       "div",
-      { className: "error__container" },
+      { className: "error-block__container" },
       _react2.default.createElement(
         "p",
         null,
